@@ -2,7 +2,7 @@
 
 Main take aways : the less you do, the better.
 
-For 1 000 000 RUNS:
+For 1 000 000 RUNS per implementation:
 
 | File                                   | average run time (ms) | total time (ms) |
 | -------------------------------------- | --------------------- | --------------- |
