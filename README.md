@@ -7,7 +7,7 @@ For 1 000 000 RUNS per implementation:
 | File                                   | average run time (ms) | total time (ms) |
 | -------------------------------------- | --------------------- | --------------- |
 | responsive-props-loop.js               | 0.003849              | 3849            |
-| responsive-props-resp-loop.js          | 0.003164              | 3164            |
+| responsive-props-resp-loop.js          | 0.00309               | 3090            |
 | responsive-props-no-loop-bp-loop.js    | 0.00081               | 810             |
 | responsive-props-no-loop-bp-dyn-str.js | 0.000369              | 369             |
 | responsive-props-no-loop.js            | 0.000322              | 322             |

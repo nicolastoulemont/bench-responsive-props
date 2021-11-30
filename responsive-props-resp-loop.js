@@ -77,10 +77,10 @@ function mapSpacing({ margin, padding }, styles, media) {
 function processed(props) {
   let media = {}
   let styles = {}
-  Object.assign(styles, mapDimension(props, styles, media))
-  Object.assign(styles, mapRadius(props, styles, media))
-  Object.assign(styles, mapDisplay(props, styles, media))
-  Object.assign(styles, mapSpacing(props, styles, media))
+  mapDimension(props, styles, media)
+  mapRadius(props, styles, media)
+  mapDisplay(props, styles, media)
+  mapSpacing(props, styles, media)
   Object.assign(styles, media)
   return styles
 }
