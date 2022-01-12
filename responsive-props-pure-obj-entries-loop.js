@@ -1,3 +1,8 @@
+/**
+ * Pure function implementation of responsive props (props -> styles)
+ * with a for of loop on the props object entries
+ */
+
 const breakpoints = {
   sm: 470,
   md: 780,
@@ -50,6 +55,4 @@ for (let i = 0; i < RUNS; i++) {
 console.log('-----------')
 console.log(`stats for ${RUNS} runs`)
 console.log(`total: ${deltas.reduce((acc, num) => acc + num, 0)}ms`)
-console.log(
-  `average run: ${deltas.reduce((acc, num) => acc + num, 0) / deltas.length}ms`
-)
+console.log(`average run: ${deltas.reduce((acc, num) => acc + num, 0) / deltas.length}ms`)

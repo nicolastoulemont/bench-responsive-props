@@ -1,13 +1,13 @@
+/**
+ * Inlining the styles mappers for performance
+ * still looping on the breakpoints as dynamic properties of the responsiveObject
+ * with a for of loop on the responsiveObject entries
+ */
+
 const breakpoints = {
   sm: 470,
   md: 780,
   lg: 1020,
-}
-
-const mediaQueries = {
-  sm: `@media (min-width: ${breakpoints.sm}px)`,
-  md: `@media (min-width: ${breakpoints.md}px)`,
-  lg: `@media (min-width: ${breakpoints.lg}px)`,
 }
 
 const raw = {
@@ -24,28 +24,16 @@ function isResponsive(value) {
 }
 
 function handleResponsive(responsiveObject, styles, media, key) {
-  if (responsiveObject.base) {
-    styles[key] = responsiveObject.base
-  }
-  if (responsiveObject.sm) {
-    if (media[mediaQueries.sm]) {
-      media[mediaQueries.sm][key] = responsiveObject.sm
-    } else {
-      media[mediaQueries.sm] = { [key]: responsiveObject.sm }
-    }
-  }
-  if (responsiveObject.md) {
-    if (media[mediaQueries.md]) {
-      media[mediaQueries.md][key] = responsiveObject.md
-    } else {
-      media[mediaQueries.md] = { [key]: responsiveObject.md }
-    }
-  }
-  if (responsiveObject.lg) {
-    if (media[mediaQueries.lg]) {
-      media[mediaQueries.lg][key] = responsiveObject.lg
-    } else {
-      media[mediaQueries.lg] = { [key]: responsiveObject.lg }
+  for (const [bp, value] of Object.entries(responsiveObject)) {
+    if (bp === 'base') {
+      styles[key] = value
+    } else if (breakpoints[bp]) {
+      const query = `@media (min-width: ${breakpoints[bp]}px)`
+      if (media[query]) {
+        media[query][key] = value
+      } else {
+        media[query] = { [key]: value }
+      }
     }
   }
 }
@@ -77,6 +65,7 @@ function mapDimension({ width, height }, styles, media) {
     styles.height = height
   }
 }
+
 function mapSpacing({ margin, padding }, styles, media) {
   if (isResponsive(margin)) {
     handleResponsive(margin, styles, media, 'margin')
@@ -112,10 +101,7 @@ for (let i = 0; i < RUNS; i++) {
   const end = Date.now()
   deltas.push(end - start)
 }
-
 console.log('-----------')
 console.log(`stats for ${RUNS} runs`)
 console.log(`total: ${deltas.reduce((acc, num) => acc + num, 0)}ms`)
-console.log(
-  `average run: ${deltas.reduce((acc, num) => acc + num, 0) / deltas.length}ms`
-)
+console.log(`average run: ${deltas.reduce((acc, num) => acc + num, 0) / deltas.length}ms`)

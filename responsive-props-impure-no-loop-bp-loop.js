@@ -1,7 +1,18 @@
+/**
+ * Inlining the styles mappers for performance
+ * still looping on the breakpoints as static array
+ */
+
 const breakpoints = {
   sm: 470,
   md: 780,
   lg: 1020,
+}
+
+const mediaQueries = {
+  sm: '@media (min-width: 470px)',
+  md: '@media (min-width: 780px)',
+  lg: '@media (min-width: 1020px)',
 }
 
 const raw = {
@@ -17,16 +28,17 @@ function isResponsive(value) {
   return typeof value === 'object'
 }
 
+const bps = ['base', 'sm', 'md', 'lg']
+
 function handleResponsive(responsiveObject, styles, media, key) {
-  for (const [bp, value] of Object.entries(responsiveObject)) {
-    if (bp === 'base') {
-      styles[key] = value
-    } else if (breakpoints[bp]) {
-      const query = `@media (min-width: ${breakpoints[bp]}px)`
-      if (media[query]) {
-        media[query][key] = value
+  for (const bp of bps) {
+    if (bp === 'base' && responsiveObject[bp]) {
+      styles[key] = responsiveObject[bp]
+    } else if (responsiveObject[bp]) {
+      if (media[mediaQueries[bp]]) {
+        media[mediaQueries[bp]][key] = responsiveObject[bp]
       } else {
-        media[query] = { [key]: value }
+        media[mediaQueries[bp]] = { [key]: responsiveObject[bp] }
       }
     }
   }
@@ -59,7 +71,6 @@ function mapDimension({ width, height }, styles, media) {
     styles.height = height
   }
 }
-
 function mapSpacing({ margin, padding }, styles, media) {
   if (isResponsive(margin)) {
     handleResponsive(margin, styles, media, 'margin')
@@ -95,9 +106,8 @@ for (let i = 0; i < RUNS; i++) {
   const end = Date.now()
   deltas.push(end - start)
 }
+
 console.log('-----------')
 console.log(`stats for ${RUNS} runs`)
 console.log(`total: ${deltas.reduce((acc, num) => acc + num, 0)}ms`)
-console.log(
-  `average run: ${deltas.reduce((acc, num) => acc + num, 0) / deltas.length}ms`
-)
+console.log(`average run: ${deltas.reduce((acc, num) => acc + num, 0) / deltas.length}ms`)
