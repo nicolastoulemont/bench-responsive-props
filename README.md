@@ -52,12 +52,13 @@ Emotion compatible object:
 
 For 1 000 000 RUNS per implementation:
 
-| File                                             | average run time (ms) | total time (ms) | increase  |
-| ------------------------------------------------ | --------------------- | --------------- | --------- |
-| responsive-props-impure-no-loop.js               | 0.000322              | 322             | 0         |
-| responsive-props-impure-no-loop-bp-dyn-str.js    | 0.000369              | 369             | +14.5963% |
-| responsive-props-impure-no-loop-bp-loop.js       | 0.00081               | 810             | +151.553% |
-| responsive-props-impure-resp-for-in-loop.js      | 0.001159              | 1159            | +259.937% |
-| responsive-props-pure-for-in-loop.js             | 0.00243               | 2438            | +657.142% |
-| responsive-props-impure-resp-obj-entries-loop.js | 0.00309               | 3090            | +859.627% |
-| responsive-props-pure-obj-entries-loop.js        | 0.003849              | 3849            | +1095.34% |
+| File                              | average run time (ms) | total time (ms) | increase  |
+| --------------------------------- | --------------------- | --------------- | --------- |
+| impure-no-loop.js                 | 0.000322              | 322             | 0         |
+| impure-no-loop-bp-dyn-str.js      | 0.000369              | 369             | +14.596%  |
+| impure-no-loop-bp-for-of-loop.js  | 0.00081               | 810             | +151.553% |
+| impure-no-loop-bp-foreach-loop.js | 0.000846              | 846             | +162.732% |
+| impure-resp-for-in-loop.js        | 0.001159              | 1159            | +259.937% |
+| pure-for-in-loop.js               | 0.00243               | 2438            | +657.142% |
+| impure-resp-obj-entries-loop.js   | 0.00309               | 3090            | +859.627% |
+| pure-obj-entries-loop.js          | 0.003849              | 3849            | +1095.34% |
