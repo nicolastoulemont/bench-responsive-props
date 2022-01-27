@@ -1,6 +1,6 @@
 ## Quick benchmark of the different implementations of responsive props
 
-Main take aways : the less you do, the better.
+Main take away : the less you do, the better.
 
 ### Objectives
 
